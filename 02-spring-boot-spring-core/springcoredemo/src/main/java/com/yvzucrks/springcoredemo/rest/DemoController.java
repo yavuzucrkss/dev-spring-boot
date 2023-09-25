@@ -11,17 +11,11 @@ public class DemoController {
 
     //define a privat field for the dependency
     private Coach myCoach;
-    private Coach myPrimaryCoach;
 
     @Autowired
-    public void setCoach(@Qualifier("tennisCoach")Coach theCoach) {
-        myCoach = theCoach;
-    }
-
-    @Autowired
-    public void DemoController(Coach theCoach){
+    public void DemoController(@Qualifier("tennisCoach") Coach theCoach){
         System.out.println("In constructor: " + getClass().getSimpleName());
-        myPrimaryCoach = theCoach;
+        myCoach = theCoach;
     }
 
     @GetMapping("/dailyworkout")
@@ -29,8 +23,6 @@ public class DemoController {
         return myCoach.getDailyWorkout();
     }
 
-    @GetMapping("/primaryworkout")
-    public String getPrimaryWorkout(){
-        return myPrimaryCoach.getDailyWorkout();
-    }
+
+
 }
