@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Student Confirmation</title>
+
+    <!-- referance CSS file -->
+    <link rel="stylesheet" th:href="@{/css/demo.css}" />
+</head>
+
+<body>
+
+    The student is confirmed: <span th:text="${student.firstName} + ' ' + ${student.lastName}"></span>
+
+    <br><br>
+    Country: <span th:text="${student.country}"></span>
+
+    <br><br>
+    Favorite Language: <span th:text="${student.favoriteLanguage}"></span>
+
+    <br><br>
+    Favorite Systems:
+    <ul>
+        <li th:each="tempSystem : ${student.favoriteSystems}" th:text="${tempSystem}">
+    </ul>
+</body>
