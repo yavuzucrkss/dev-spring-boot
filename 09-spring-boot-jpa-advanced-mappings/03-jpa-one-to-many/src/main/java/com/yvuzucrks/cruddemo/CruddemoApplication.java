@@ -4,6 +4,7 @@ import com.yvuzucrks.cruddemo.dao.AppDAO;
 import com.yvuzucrks.cruddemo.entity.Course;
 import com.yvuzucrks.cruddemo.entity.Instructor;
 import com.yvuzucrks.cruddemo.entity.InstructorDetail;
+import com.yvuzucrks.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,9 +34,50 @@ public class CruddemoApplication {
 			//updateInstructor(appDAO);
 			//deleteInstructor(appDAO);
 			//updateCourse(appDAO);
-			deleteCourse(appDAO);
+			//deleteCourse(appDAO);
+
+			//review course (uni)
+			//createCourseAndReviews(appDAO);
+			findCourseAndReviews(appDAO);
+			deleteCourseAndReviews(appDAO);
 
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+		int theId = 10;
+
+		System.out.println("Deleting course id: " + theId);
+
+		//auto delete reviews because relation is uni..
+		appDAO.deleteCourseById(theId);
+
+		System.out.println("Done!");
+	}
+
+	private void findCourseAndReviews(AppDAO appDAO) {
+		int theId = 10;
+		Course tempCourse = appDAO.findCourseAndReviewByCourseId(theId);
+		System.out.println("Course: " + tempCourse);
+		System.out.println("Reviews: " + tempCourse.getReviews());
+		System.out.println("Done!");
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+
+		Course course = new Course("Pacman - How to Score One Million Points");
+
+		course.addReview(new Review("Great Course !! "));
+		course.addReview(new Review("Bod Course !! "));
+		course.addReview(new Review("Good Course !! "));
+
+		System.out.println("Saving the course..");
+		System.out.println(course);
+		System.out.println(course.getReviews());
+		appDAO.save(course);
+		System.out.println("Done!");
+
+
 	}
 
 	private void deleteCourse(AppDAO appDAO) {
